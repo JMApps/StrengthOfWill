@@ -19,14 +19,16 @@ import jmapps.strengthofwill.data.database.DatabaseAsset
 import jmapps.strengthofwill.data.file.TypeFace
 import jmapps.strengthofwill.presentation.mvp.main.MainContract
 import jmapps.strengthofwill.presentation.mvp.main.MainPresenterImpl
+import jmapps.strengthofwill.presentation.mvp.main.ScrollContract
 import jmapps.strengthofwill.presentation.mvp.main.ScrollPresenterImpl
 import jmapps.strengthofwill.presentation.mvp.settings.SettingsContract
 import jmapps.strengthofwill.presentation.mvp.settings.SettingsPresenterImpl
+import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
 class MainFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener,
     SettingsContract.SettingsView, MainContract.MainView,
-    CompoundButton.OnCheckedChangeListener {
+    CompoundButton.OnCheckedChangeListener, ScrollContract.ScrollView {
 
     private lateinit var rootMain: View
     private var sectionNumber: Int? = null
@@ -75,6 +77,8 @@ class MainFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListe
             preferences.getBoolean("key_main_favorite_$sectionNumber", false)
         rootMain.tbFavorites.setOnCheckedChangeListener(this)
 
+        scrollPresenterImpl = ScrollPresenterImpl(this, sectionNumber!!, rootMain.nvMainScroll,
+            rootMain.pbScrollCount)
         scrollPresenterImpl.scrollCount()
         scrollPresenterImpl.loadLastCount(preferences)
 
