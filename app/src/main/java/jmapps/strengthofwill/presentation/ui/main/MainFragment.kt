@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
+import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
@@ -84,19 +85,12 @@ class MainFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListe
     }
 
     override fun showChapterTitle(title: String) {
-        rootMain.tvChapterTitle.movementMethod = LinkMovementMethod.getInstance()
-        rootMain.tvChapterTitle.setText(
-            mainPresenterImpl.stringBuilder(title),
-            TextView.BufferType.SPANNABLE
-        )
+        rootMain.tvChapterTitle.text = Html.fromHtml("<b>$title</b>")
     }
 
     override fun showChapterContent(content: String) {
         rootMain.tvChapterContent.movementMethod = LinkMovementMethod.getInstance()
-        rootMain.tvChapterContent.setText(
-            mainPresenterImpl.stringBuilder(content),
-            TextView.BufferType.SPANNABLE
-        )
+        rootMain.tvChapterContent.setText(mainPresenterImpl.stringBuilder(content), TextView.BufferType.SPANNABLE)
     }
 
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {

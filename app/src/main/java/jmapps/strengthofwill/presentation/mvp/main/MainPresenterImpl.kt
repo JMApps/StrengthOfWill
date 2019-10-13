@@ -79,7 +79,7 @@ class MainPresenterImpl(
                     try {
                         @SuppressLint("Recycle")
                         val cursor = database.query(
-                            "Table_footnote",
+                            "Table_of_footnotes",
                             arrayOf("_id", "FootnoteContent"),
                             "_id = ?",
                             arrayOf(finalClickString), null, null, null

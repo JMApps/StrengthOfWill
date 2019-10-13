@@ -7,7 +7,7 @@ import jmapps.strengthofwill.R
 
 class ViewHolderChapters(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    val tvParagraph: TextView = itemView.findViewById(R.id.tvChapterNumber)
+    val tvParagraph: TextView = itemView.findViewById(R.id.tvParagraph)
     val tvChapterTitle: TextView = itemView.findViewById(R.id.tvChapterTitle)
 
     fun findItemClick(onItemChapterClick: AdapterChapters.OnItemChapterClick, idPosition: Int) {
