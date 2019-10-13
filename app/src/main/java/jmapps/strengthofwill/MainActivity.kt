@@ -13,10 +13,16 @@ import com.google.android.material.appbar.AppBarLayout
 import jmapps.strengthofwill.data.database.DatabaseAsset
 import jmapps.strengthofwill.presentation.mvp.other.OtherContract
 import jmapps.strengthofwill.presentation.mvp.other.OtherPresenterImpl
+import jmapps.strengthofwill.presentation.ui.about.BottomSheetAboutUs
+import jmapps.strengthofwill.presentation.ui.chapters.FragmentChapters
+import jmapps.strengthofwill.presentation.ui.favorites.FragmentFavorites
 import jmapps.strengthofwill.presentation.ui.main.SectionsPagerAdapter
+import jmapps.strengthofwill.presentation.ui.settings.BottomSheetSettings
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener, OtherContract.OtherView {
+class MainActivity : AppCompatActivity(), View.OnClickListener, OtherContract.OtherView,
+    FragmentChapters.GetChapterItem,
+    FragmentFavorites.GetFavoriteItem {
 
     private lateinit var database: SQLiteDatabase
     private lateinit var otherPresenter: OtherPresenterImpl
@@ -82,20 +88,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, OtherContract.Ot
         }
     }
 
+    override fun getItemPosition(position: Int) {
+        mainViewPager.currentItem = position
+    }
+
     override fun showFavoriteList() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        FragmentFavorites().show(supportFragmentManager, "favorites")
     }
 
     override fun showListChapters() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        FragmentChapters().show(supportFragmentManager, "chapters")
     }
 
     override fun showSettings() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        BottomSheetSettings().show(supportFragmentManager, "settings")
     }
 
     override fun showAboutUs() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        BottomSheetAboutUs().show(supportFragmentManager, "about")
     }
 
     override fun onStop() {
