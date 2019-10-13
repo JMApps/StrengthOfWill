@@ -8,7 +8,8 @@ import jmapps.strengthofwill.R
 
 class AdapterFavorites(
     private val modelFavorites: MutableList<ModelFavorites>,
-    private val onItemFavoriteClick: OnItemFavoriteClick) :
+    private val onItemFavoriteClick: OnItemFavoriteClick
+) :
     RecyclerView.Adapter<ViewHolderFavorites>() {
 
     interface OnItemFavoriteClick {
