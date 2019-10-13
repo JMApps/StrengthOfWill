@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import jmapps.strengthofwill.R
+import jmapps.strengthofwill.data.database.DatabaseLists
 import kotlinx.android.synthetic.main.fragment_chapters.view.*
 
 class FragmentChapters : BottomSheetDialogFragment(), AdapterChapters.OnItemChapterClick,
