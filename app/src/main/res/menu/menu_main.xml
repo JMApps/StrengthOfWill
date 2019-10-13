@@ -2,9 +2,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="jmapps.strengthofwill.MainActivity">
+
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
+        android:id="@+id/settings"
         android:title="@string/action_settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/aboutUs"
+        android:title="@string/action_about_us"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/rateApp"
+        android:title="@string/action_rate"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/shareLink"
+        android:title="@string/action_share"
         app:showAsAction="never" />
 </menu>

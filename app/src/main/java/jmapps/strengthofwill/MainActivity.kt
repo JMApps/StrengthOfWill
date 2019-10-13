@@ -10,12 +10,16 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.google.android.material.appbar.AppBarLayout
+import jmapps.strengthofwill.data.database.DatabaseAsset
+import jmapps.strengthofwill.presentation.mvp.other.OtherContract
+import jmapps.strengthofwill.presentation.mvp.other.OtherPresenterImpl
 import jmapps.strengthofwill.presentation.ui.main.SectionsPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, OtherContract.OtherView {
 
     private lateinit var database: SQLiteDatabase
+    private lateinit var otherPresenter: OtherPresenterImpl
 
     private lateinit var preferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
@@ -28,6 +32,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this)
         editor = preferences.edit()
+
+        otherPresenter = OtherPresenterImpl(this, this)
 
         val sectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
         mainViewPager.adapter = sectionsPagerAdapter
@@ -44,6 +50,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         fabChapters.setOnClickListener(this)
         fabFavorites.setOnClickListener(this)
+
+        loadPosition()
+        openDatabase()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -52,17 +61,68 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+        when (item.itemId) {
+
+            R.id.settings -> otherPresenter.getSettings()
+
+            R.id.aboutUs -> otherPresenter.getAboutUs()
+
+            R.id.rateApp -> otherPresenter.rateApp()
+
+            R.id.shareLink -> otherPresenter.shareLink()
         }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-//            R.id.fabChapters -> otherPresenter.getListChapters()
-//
-//            R.id.fabFavorites -> otherPresenter.getFavoriteList()
+            R.id.fabChapters -> otherPresenter.getListChapters()
+
+            R.id.fabFavorites -> otherPresenter.getFavoriteList()
         }
+    }
+
+    override fun showFavoriteList() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showListChapters() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showSettings() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showAboutUs() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onStop() {
+        super.onStop()
+        savePosition()
+        closeDatabase()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        savePosition()
+        closeDatabase()
+    }
+
+    private fun savePosition() {
+        editor.putInt("key_pager_position", mainViewPager.currentItem).apply()
+    }
+
+    private fun loadPosition() {
+        mainViewPager.currentItem = preferences.getInt("key_pager_position", 0)
+    }
+
+    private fun openDatabase() {
+        database = DatabaseAsset(this).readableDatabase
+    }
+
+    private fun closeDatabase() {
+        database.close()
     }
 }
