@@ -7,15 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.main.MainFragment">
 
-    <ProgressBar
-        android:id="@+id/pbScrollCount"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
@@ -61,14 +52,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <TextView
-        android:id="@+id/tvAnswer"
-        android:layout_width="0dp"
-        android:layout_height="5dp"
-        android:background="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvChapterTitle" />
+    <ProgressBar
+        android:id="@+id/pbScrollPosition"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:progressDrawable="@drawable/progress_color" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
@@ -79,7 +68,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAnswer"
+        app:layout_constraintTop_toBottomOf="@+id/pbScrollPosition"
         app:layout_constraintVertical_bias="1.0">
 
         <TextView
