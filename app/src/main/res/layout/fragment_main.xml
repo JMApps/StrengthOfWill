@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tvQuestionNumber"
+            android:id="@+id/tvParagraph"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -48,16 +48,10 @@
             android:text=""
             android:textOff=""
             android:textOn="" />
-
-        <Button
-            android:id="@+id/btnCopyContent"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:background="@drawable/copy_state" />
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvQuestionContent"
+        android:id="@+id/tvChapterTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -71,17 +65,11 @@
     <TextView
         android:id="@+id/tvAnswer"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="5dp"
         android:background="@color/colorAccent"
-        android:gravity="center"
-        android:padding="16dp"
-        android:text="Paragraph"
-        android:textColor="@color/White"
-        android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvQuestionContent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvChapterTitle" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
@@ -96,7 +84,7 @@
         app:layout_constraintVertical_bias="1.0">
 
         <TextView
-            android:id="@+id/tvAnswerContent"
+            android:id="@+id/tvChapterContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"

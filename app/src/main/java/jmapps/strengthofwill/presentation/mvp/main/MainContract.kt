@@ -8,9 +8,9 @@ interface MainContract {
 
         fun showDatabaseExceptions(e: String)
 
-        fun showParagraph(number: String)
+        fun showParagraph(paragraph: String)
 
-        fun showChapterTitle(content: String)
+        fun showChapterTitle(title: String)
 
         fun showChapterContent(content: String)
 
