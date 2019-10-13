@@ -1,17 +1,49 @@
 package jmapps.strengthofwill
 
+import android.annotation.SuppressLint
+import android.content.SharedPreferences
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
+import com.google.android.material.appbar.AppBarLayout
+import jmapps.strengthofwill.presentation.ui.main.SectionsPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
+    private lateinit var database: SQLiteDatabase
+
+    private lateinit var preferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
+
+    @SuppressLint("CommitPrefEdits")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(this)
+        editor = preferences.edit()
+
+        val sectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
+        mainViewPager.adapter = sectionsPagerAdapter
+
+        appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
+            if (verticalOffset < 0) {
+                fabChapters.hide()
+                fabFavorites.hide()
+            } else {
+                fabChapters.show()
+                fabFavorites.show()
+            }
+        })
+
+        fabChapters.setOnClickListener(this)
+        fabFavorites.setOnClickListener(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -23,6 +55,14 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+//            R.id.fabChapters -> otherPresenter.getListChapters()
+//
+//            R.id.fabFavorites -> otherPresenter.getFavoriteList()
         }
     }
 }
